@@ -1,6 +1,5 @@
-# Martin Scorsese AI Chat – Technical Docs
+# Martin Scorsese AI 
 
-## What This Is  
 Chatbot that channels the voice, wit, and encyclopedic film knowledge of Martin Scorsese. Built on a RAG stack, it thinks like him (well, almost).
 
 ## Stack
