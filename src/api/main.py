@@ -16,8 +16,20 @@ CORS(
 
 conversation = Conversation()
 
-# Store conversation history in memory (in a production app, this would be in a database)
+
 conversation_history = {}
+MAX_HISTORY_SIZE = 50
+
+
+@app.route("/api/chat/clear", methods=["POST"])
+def clear_history():
+    try:
+        session_id = "default_session"
+        if session_id in conversation_history:
+            conversation_history[session_id] = []
+        return jsonify({"status": "success"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route("/api/chat", methods=["POST"])
@@ -27,12 +39,15 @@ def chat():
         if not data or "question" not in data:
             return jsonify({"error": "No question provided"}), 400
 
-        # Generate a unique session ID based on client IP or other identifier
         session_id = "default_session"
 
-        # Initialize history for new sessions
+        # Initialize or trim history if too long
         if session_id not in conversation_history:
             conversation_history[session_id] = []
+        elif len(conversation_history[session_id]) >= MAX_HISTORY_SIZE:
+            conversation_history[session_id] = conversation_history[session_id][
+                -MAX_HISTORY_SIZE:
+            ]
 
         # Add the current question to history
         conversation_history[session_id].append(f"User: {data['question']}")
