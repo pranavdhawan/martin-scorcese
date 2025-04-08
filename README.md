@@ -29,3 +29,6 @@ Just enough glue to keep the whole thing humming.
 ```env
 PINECONE_API_KEY=your_pinecone_key
 GEMINI_API_KEY=your_gemini_key
+```
+
+<p align="center"> <img src="https://github.com/user-attachments/assets/d8947b7b-39d6-4e1b-a3ec-eaa99292be82" alt="Martin Scorsese AI" width="400"/> </p>
